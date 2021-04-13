@@ -24,3 +24,18 @@ module "cdn_bucket" {
   source = "./modules/s3_bucket"
   config = var.environment
 }
+
+module "lambdaedge_function" {
+  source = "./modules/lambda_edge_us_east"
+  providers = {
+    aws = aws.us
+  }
+  config = var.environment
+}
+
+module "cdn" {
+  source                    = "./modules/cf_distribution"
+  config                    = var.environment
+  lambda_function_alias_arn = module.lambdaedge_function.lambda_function_arn
+  content_bucket            = module.cdn_bucket.bucket_name
+}
