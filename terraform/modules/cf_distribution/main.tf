@@ -22,6 +22,12 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   price_class         = local.price_class
   tags                = local.common_tags
 
+  logging_config {
+    include_cookies = false
+    bucket          = var.log_bucket_name
+    prefix          = "cloudfront"
+  }
+
   origin {
     domain_name = var.content_bucket.bucket_regional_domain_name
     origin_id   = local.s3_origin_id

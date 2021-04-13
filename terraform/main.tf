@@ -37,5 +37,6 @@ module "cdn" {
   source                    = "./modules/cf_distribution"
   config                    = var.environment
   lambda_function_alias_arn = module.lambdaedge_function.lambda_function_arn
-  content_bucket            = module.cdn_bucket.bucket_name
+  content_bucket            = module.cdn_bucket.content_bucket
+  log_bucket_name           = module.cdn_bucket.log_bucket_name
 }
