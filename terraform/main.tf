@@ -1,15 +1,3 @@
-terraform {
-  required_version = "~> 0.14.5"
-
-  required_providers {
-    aws      = "~> 3.16"
-    local    = "~> 1.4"
-    null     = "~> 2.1"
-    template = "~> 2.1"
-    random   = "~> 2.2"
-  }
-}
-
 provider "aws" {
   region              = var.aws_region
   allowed_account_ids = var.aws_allowed_ids
@@ -31,3 +19,8 @@ provider "aws" {
 #    encrypt        = true
 #  }
 #}
+
+module "cdn_bucket" {
+  source = "./modules/s3_bucket"
+  config = var.environment
+}

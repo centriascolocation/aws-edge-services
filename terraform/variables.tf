@@ -8,6 +8,6 @@ variable "aws_region" {
   description = "where resources where deployed by default"
 }
 variable "environment" {
-  type        = map(any)
-  description = "configuration variables"
+  type        = any
+  description = "include main variable map"
 }
