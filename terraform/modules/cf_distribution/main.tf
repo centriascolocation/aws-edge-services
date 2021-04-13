@@ -4,6 +4,7 @@ locals {
   apex_domain            = var.config["apex_domain"]
   viewer_certificate_arn = var.config["viewer_certificate_arn"]
   s3_origin_id           = var.config["s3_origin_id"]
+  price_class            = lookup(local.region_config["CDN_settings"], "price_class")
 
   common_tags = merge(
     lookup(local.region_config, "tags"),
@@ -18,7 +19,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   aliases             = [local.apex_domain]
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  price_class         = "PriceClass_100"
+  price_class         = local.price_class
   tags                = local.common_tags
 
   origin {
