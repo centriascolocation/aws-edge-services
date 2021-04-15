@@ -24,7 +24,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
 
   logging_config {
     include_cookies = false
-    bucket          = var.log_bucket_name
+    bucket          = var.log_bucket.bucket_regional_domain_name
     prefix          = "cloudfront"
   }
 

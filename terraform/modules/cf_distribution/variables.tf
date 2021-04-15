@@ -9,9 +9,9 @@ variable "lambda_function_alias_arn" {
 }
 variable "content_bucket" {
   type        = any
-  description = "Name of bucket with HTML content to be served"
+  description = "Bucket with HTML content to be served"
 }
-variable "log_bucket_name" {
-  type        = string
-  description = "Name of bucket with log files"
+variable "log_bucket" {
+  type        = any
+  description = "Bucket with log files"
 }

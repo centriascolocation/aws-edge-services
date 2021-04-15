@@ -38,7 +38,7 @@ module "cdn" {
   config                    = var.environment
   lambda_function_alias_arn = module.lambdaedge_function.lambda_function_arn
   content_bucket            = module.cdn_bucket.content_bucket
-  log_bucket_name           = module.cdn_bucket.log_bucket_name
+  log_bucket                = module.cdn_bucket.log_bucket
 }
 
 module "waf_rules" {
