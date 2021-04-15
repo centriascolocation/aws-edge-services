@@ -40,3 +40,7 @@ module "cdn" {
   content_bucket            = module.cdn_bucket.content_bucket
   log_bucket_name           = module.cdn_bucket.log_bucket_name
 }
+
+module "waf_rules" {
+  source = "./modules/waf_rules"
+}
