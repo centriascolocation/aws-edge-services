@@ -1,10 +1,3 @@
-/*
-# This is not aclv2, so we skip this
-module "waf_owasp_global_cloudfront" {
-  source  = "binbashar/waf-owasp/aws//examples/waf-global-cloudfront"
-  version = "1.0.14"
-}*/
-
 module "waf" {
   source  = "umotif-public/waf-webaclv2/aws"
   version = "~> 1.5.0"
