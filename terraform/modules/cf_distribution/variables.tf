@@ -2,6 +2,10 @@ variable "config" {
   type        = any
   description = "main variable map"
 }
+variable "web_acl_arn" {
+  type        = string
+  description = "acl arn for cdn attachment"
+}
 variable "lambda_function_alias_arn" {
   type        = string
   description = "Arn of Lambda@edge alias for origin request rewrite"

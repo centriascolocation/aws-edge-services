@@ -33,14 +33,18 @@ module "lambdaedge_function" {
   config = var.environment
 }
 
+module "waf_rules" {
+  source = "./modules/waf_rules"
+  providers = {
+    aws = aws.us
+  }
+}
+
 module "cdn" {
   source                    = "./modules/cf_distribution"
   config                    = var.environment
   lambda_function_alias_arn = module.lambdaedge_function.lambda_function_arn
   content_bucket            = module.cdn_bucket.content_bucket
   log_bucket                = module.cdn_bucket.log_bucket
-}
-
-module "waf_rules" {
-  source = "./modules/waf_rules"
+  web_acl_arn               = module.waf_rules.waf_acl_arn
 }

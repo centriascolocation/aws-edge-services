@@ -11,3 +11,11 @@ output "log_bucket_name" {
   value       = module.cdn_bucket.log_bucket.id
   description = "name of log bucket"
 }
+output "waf_acl_id" {
+  value       = module.waf_rules.waf_acl_id
+  description = "acl id for cdn attachment"
+}
+output "waf_acl_arn" {
+  value       = module.waf_rules.waf_acl_arn
+  description = "acl arn for cdn attachment"
+}
