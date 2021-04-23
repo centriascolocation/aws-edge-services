@@ -21,10 +21,11 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   default_root_object = "index.html"
   price_class         = local.price_class
   tags                = local.common_tags
+  web_acl_id          = var.web_acl_arn
 
   logging_config {
     include_cookies = false
-    bucket          = var.log_bucket_name
+    bucket          = var.log_bucket.bucket_regional_domain_name
     prefix          = "cloudfront"
   }
 

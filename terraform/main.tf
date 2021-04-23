@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias  = "us"
+  alias  = "us-east-1"
   region = "us-east-1"
 }
 
@@ -28,9 +28,16 @@ module "cdn_bucket" {
 module "lambdaedge_function" {
   source = "./modules/lambda_edge_us_east"
   providers = {
-    aws = aws.us
+    aws = aws.us-east-1
   }
   config = var.environment
+}
+
+module "waf_rules" {
+  source = "./modules/waf_rules"
+  providers = {
+    aws = aws.us-east-1
+  }
 }
 
 module "cdn" {
@@ -38,5 +45,6 @@ module "cdn" {
   config                    = var.environment
   lambda_function_alias_arn = module.lambdaedge_function.lambda_function_arn
   content_bucket            = module.cdn_bucket.content_bucket
-  log_bucket_name           = module.cdn_bucket.log_bucket_name
+  log_bucket                = module.cdn_bucket.log_bucket
+  web_acl_arn               = module.waf_rules.waf_acl_arn
 }
